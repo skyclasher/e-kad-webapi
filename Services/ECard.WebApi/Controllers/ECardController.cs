@@ -13,7 +13,7 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ECardController : ControllerBase
     {
         private IECardDetailService _ecardDetailService;

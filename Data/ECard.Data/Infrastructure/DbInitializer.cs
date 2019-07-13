@@ -1,4 +1,6 @@
-﻿using ECard.Entities.Entities;
+﻿using Bogus;
+using ECard.Entities.Entities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ECard.Data.Infrastructure
@@ -11,6 +13,7 @@ namespace ECard.Data.Infrastructure
             context.Database.EnsureCreated();//if db is not exist ,it will create database .but ,do nothing .
             SeedUser(context);
             SeedCardDetail(context);
+            SeedRsvp(context);
 
         }
 
@@ -54,6 +57,32 @@ namespace ECard.Data.Infrastructure
             };
 
             context.ECardDetail.Add(eCardDetail);
+            context.SaveChanges();
+        }
+        private static void SeedRsvp(ECardDataContext context)
+        {
+            if (context.Rsvp.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var attendance = new List<string>
+            {
+                "H",
+                "M",
+                "T",
+            };
+            var rsvp = new Faker<Rsvp>()
+                .RuleFor(o => o.Id_EcardDetail, 1)
+                .RuleFor(o => o.Name, (f, u) => f.Name.FullName())
+                .RuleFor(o => o.TelNo, (f, u) => f.Phone.PhoneNumber())
+                .RuleFor(o => o.Wishes, f => f.Lorem.Sentence())
+                .RuleFor(o => o.Email, f => f.Internet.Email())
+                .RuleFor(o => o.Attendance, f => f.PickRandom(attendance))
+                .RuleFor(o => o.AttCount, f => f.Random.Int(1, 10));
+
+
+            context.Rsvp.AddRange(rsvp.Generate(200));
             context.SaveChanges();
         }
 

@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev\\Ecard\\Ecard\\Data\\ECard.Data\\ECard.Data.csproj": {}
+    "C:\\Dev\\ECard\\e-kad-webapi\\Data\\ECard.Data\\ECard.Data.csproj": {}
   },
   "projects": {
-    "D:\\Dev\\Ecard\\Ecard\\Data\\ECard.Data\\ECard.Data.csproj": {
+    "C:\\Dev\\ECard\\e-kad-webapi\\Data\\ECard.Data\\ECard.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\Ecard\\Ecard\\Data\\ECard.Data\\ECard.Data.csproj",
+        "projectUniqueName": "C:\\Dev\\ECard\\e-kad-webapi\\Data\\ECard.Data\\ECard.Data.csproj",
         "projectName": "ECard.Data",
-        "projectPath": "D:\\Dev\\Ecard\\Ecard\\Data\\ECard.Data\\ECard.Data.csproj",
-        "packagesPath": "C:\\Users\\SYAFIQ-LAPTOP\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\Ecard\\Ecard\\Data\\ECard.Data\\obj\\",
+        "projectPath": "C:\\Dev\\ECard\\e-kad-webapi\\Data\\ECard.Data\\ECard.Data.csproj",
+        "packagesPath": "C:\\Users\\asyaf\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\ECard\\e-kad-webapi\\Data\\ECard.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\SYAFIQ-LAPTOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\asyaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -30,8 +32,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\Dev\\Ecard\\Ecard\\Shared\\ECard.Entities\\ECard.Entities.csproj": {
-                "projectPath": "D:\\Dev\\Ecard\\Ecard\\Shared\\ECard.Entities\\ECard.Entities.csproj"
+              "C:\\Dev\\ECard\\e-kad-webapi\\Shared\\ECard.Entities\\ECard.Entities.csproj": {
+                "projectPath": "C:\\Dev\\ECard\\e-kad-webapi\\Shared\\ECard.Entities\\ECard.Entities.csproj"
               }
             }
           }
@@ -45,6 +47,10 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[28.0.2, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -64,21 +70,23 @@
         }
       }
     },
-    "D:\\Dev\\Ecard\\Ecard\\Shared\\ECard.Entities\\ECard.Entities.csproj": {
+    "C:\\Dev\\ECard\\e-kad-webapi\\Shared\\ECard.Entities\\ECard.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\Ecard\\Ecard\\Shared\\ECard.Entities\\ECard.Entities.csproj",
+        "projectUniqueName": "C:\\Dev\\ECard\\e-kad-webapi\\Shared\\ECard.Entities\\ECard.Entities.csproj",
         "projectName": "ECard.Entities",
-        "projectPath": "D:\\Dev\\Ecard\\Ecard\\Shared\\ECard.Entities\\ECard.Entities.csproj",
-        "packagesPath": "C:\\Users\\SYAFIQ-LAPTOP\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\Ecard\\Ecard\\Shared\\ECard.Entities\\obj\\",
+        "projectPath": "C:\\Dev\\ECard\\e-kad-webapi\\Shared\\ECard.Entities\\ECard.Entities.csproj",
+        "packagesPath": "C:\\Users\\asyaf\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\ECard\\e-kad-webapi\\Shared\\ECard.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\SYAFIQ-LAPTOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\asyaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -90,8 +98,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\Dev\\Project\\Project.Framework\\Project.Framework.csproj": {
-                "projectPath": "D:\\Dev\\Project\\Project.Framework\\Project.Framework.csproj"
+              "C:\\Dev\\Project\\project-helper\\Project.Framework.csproj": {
+                "projectPath": "C:\\Dev\\Project\\project-helper\\Project.Framework.csproj"
               }
             }
           }
@@ -120,21 +128,23 @@
         }
       }
     },
-    "D:\\Dev\\Project\\Project.Framework\\Project.Framework.csproj": {
+    "C:\\Dev\\Project\\project-helper\\Project.Framework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\Project\\Project.Framework\\Project.Framework.csproj",
+        "projectUniqueName": "C:\\Dev\\Project\\project-helper\\Project.Framework.csproj",
         "projectName": "Project.Framework",
-        "projectPath": "D:\\Dev\\Project\\Project.Framework\\Project.Framework.csproj",
-        "packagesPath": "C:\\Users\\SYAFIQ-LAPTOP\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\Project\\Project.Framework\\obj\\",
+        "projectPath": "C:\\Dev\\Project\\project-helper\\Project.Framework.csproj",
+        "packagesPath": "C:\\Users\\asyaf\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Project\\project-helper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\SYAFIQ-LAPTOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\asyaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -157,9 +167,17 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
             "ElmahCore": {
               "target": "Package",
               "version": "[1.2.5, )"
+            },
+            "Microsoft.AspNetCore.Http.Extensions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.CSharp": {
               "target": "Package",

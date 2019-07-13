@@ -32,3 +32,17 @@ D:\Dev\Ecard\Ecard\Data\ECard.Data\bin\Debug\netstandard2.0\Project.Framework.pd
 D:\Dev\Ecard\Ecard\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.csproj.CopyComplete
 D:\Dev\Ecard\Ecard\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.dll
 D:\Dev\Ecard\Ecard\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.pdb
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\ECard.Data.deps.json
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\ECard.Data.dll
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\ECard.Data.pdb
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\ECard.Entities.dll
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\Project.Framework.dll
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\ECard.Entities.pdb
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\bin\Debug\netstandard2.0\Project.Framework.pdb
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.csprojAssemblyReference.cache
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.csproj.CoreCompileInputs.cache
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.AssemblyInfoInputs.cache
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.AssemblyInfo.cs
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.csproj.CopyComplete
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.dll
+C:\Dev\ECard\e-kad-webapi\Data\ECard.Data\obj\Debug\netstandard2.0\ECard.Data.pdb

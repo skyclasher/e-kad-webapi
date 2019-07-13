@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,7 +19,7 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
@@ -36,7 +37,7 @@ namespace WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("Authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
@@ -129,6 +130,69 @@ namespace WebApi.Controllers
         {
             _userService.Delete(id);
             return Ok();
+        }
+
+        class ClaimDTO
+        {
+            public string Issuer { get; set; }
+            public string OriginalIssuer { get; set; }
+            public string Type { get; set; }
+            public string Value { get; set; }
+            public string ValueType { get; set; }
+        }
+        class ClaimsIdentityDTO
+        {
+            public string Name { get; set; }
+            public string AuthenticationType { get; set; }
+            public bool IsAuthenticated { get; set; }
+            public string NameClaimType { get; set; }
+            public string RoleClaimType { get; set; }
+            public string Label { get; set; }
+
+            public List<ClaimDTO> Claims { get; set; }
+
+            public ClaimsIdentityDTO()
+            {
+                Claims = new List<ClaimDTO>();
+            }
+        }
+        static ClaimsIdentityDTO CreateFrom(ClaimsIdentity ci)
+        {
+            ClaimsIdentityDTO ciDTO = new ClaimsIdentityDTO()
+            {
+                Name = ci.Name,
+                AuthenticationType = ci.AuthenticationType,
+                IsAuthenticated = ci.IsAuthenticated,
+                Label = ci.Label,
+                NameClaimType = ci.NameClaimType,
+                RoleClaimType = ci.RoleClaimType
+            };
+            foreach (var claim in ci.Claims)
+            {
+                var claimDTO = new ClaimDTO()
+                {
+                    Issuer = claim.Issuer,
+                    OriginalIssuer = claim.OriginalIssuer,
+                    Type = claim.Type,
+                    Value = claim.Value,
+                    ValueType = claim.ValueType
+                };
+                ciDTO.Claims.Add(claimDTO);
+            }
+            return ciDTO;
+        }
+
+        [Route("GetClaimDetails")]
+        public string GetClaimDetails()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+
+            // Create DTO object
+            var ciDTO = CreateFrom(identity);
+            // Serialize it to json
+            var json = JsonConvert.SerializeObject(ciDTO);
+
+            return json;
         }
     }
 }

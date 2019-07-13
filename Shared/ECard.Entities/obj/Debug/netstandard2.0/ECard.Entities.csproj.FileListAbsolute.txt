@@ -26,3 +26,17 @@ D:\Dev\Ecard\Ecard\Shared\ECard.Entities\bin\Debug\netstandard2.0\System.Compone
 D:\Dev\Ecard\Ecard\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.csproj.CopyComplete
 D:\Dev\Ecard\Ecard\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.dll
 D:\Dev\Ecard\Ecard\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.pdb
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\ECard.Entities.deps.json
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\ECard.Entities.dll
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\ECard.Entities.pdb
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\Project.Framework.dll
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\System.ComponentModel.Annotations.dll
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\Project.Framework.pdb
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\bin\Debug\netstandard2.0\System.ComponentModel.Annotations.xml
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.csprojAssemblyReference.cache
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.csproj.CoreCompileInputs.cache
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.AssemblyInfoInputs.cache
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.AssemblyInfo.cs
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.csproj.CopyComplete
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.dll
+C:\Dev\ECard\e-kad-webapi\Shared\ECard.Entities\obj\Debug\netstandard2.0\ECard.Entities.pdb

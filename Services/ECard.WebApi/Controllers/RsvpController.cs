@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using ECard.Entities.DomainModels.Chart;
 using ECard.Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Project.Framework.Constants;
+using Project.Framework.Helper;
 using System.Collections.Generic;
 using WebApi.Dtos;
 using WebApi.Helpers;
@@ -11,7 +14,7 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RsvpController : ControllerBase
     {
         private IRsvpService _rsvpService;
@@ -81,6 +84,72 @@ namespace WebApi.Controllers
                 var rsvp = _rsvpService.GetByEmail(email);
                 var rsvpDto = _mapper.Map<RsvpDto>(rsvp);
                 return Ok(rsvpDto);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Route("GetRsvpByUserId/{userId}")]
+        public IActionResult GetRsvpByUserId(int userId)
+        {
+            try
+            {
+                List<Rsvp> rsvp = _rsvpService.GetByUserId(userId);
+                return Ok(rsvp);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Route("GetRsvpChartData/{userId}")]
+        public IActionResult GetRsvpChartData(int userId)
+        {
+            try
+            {
+                ChartData data = _rsvpService.GetRsvpChartData(userId);
+                return Ok(data);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Route("GetPagedRsvpByUserId/{userId}/{searchText}/{currentPage}")]
+        public IActionResult GetPagedRsvpByUserId(int userId, string searchText, int currentPage)
+        {
+            try
+            {
+                if (searchText == Constant.ReplaceText.EmptyString)
+                    searchText = string.Empty;
+
+                PagingHelper<Rsvp> data = _rsvpService.GetPagedRsvpByUserId(userId, currentPage, searchText);
+                return Ok(data);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Route("GetPagedAttendRsvpByUserId/{userId}/{searchText}/{currentPage}")]
+        public IActionResult GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage)
+        {
+            try
+            {
+                if (searchText == Constant.ReplaceText.EmptyString)
+                    searchText = string.Empty;
+
+                PagingHelper<Rsvp> data = _rsvpService.GetPagedAttendRsvpByUserId(userId, searchText, currentPage);
+                return Ok(data);
             }
             catch (AppException ex)
             {

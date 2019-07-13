@@ -3,12 +3,13 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Project\project-jwt-security\Aloji.AspNetCore.JwtSecurity\Project.AspNetCore.JwtSecurity.csproj" />
     <ProjectReference Include="..\..\Data\ECard.Data\ECard.Data.csproj" />
     <ProjectReference Include="..\..\Shared\ECard.Entities\ECard.Entities.csproj" />
   </ItemGroup>

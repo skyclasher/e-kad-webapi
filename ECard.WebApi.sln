@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECard.WebApi", "Services\EC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECard.Entities", "Shared\ECard.Entities\ECard.Entities.csproj", "{FD86B58F-E412-4E0D-AE69-BFCC4FE2568F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Framework", "..\..\Project\Project.Framework\Project.Framework.csproj", "{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Framework", "..\..\Project\project-helper\Project.Framework.csproj", "{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.JwtSecurity", "..\..\Project\project-jwt-security\Aloji.JwtSecurity\Project.JwtSecurity.csproj", "{4854E798-B559-4DD5-A892-942A574A770A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.AspNetCore.JwtSecurity", "..\..\Project\project-jwt-security\Aloji.AspNetCore.JwtSecurity\Project.AspNetCore.JwtSecurity.csproj", "{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4854E798-B559-4DD5-A892-942A574A770A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4854E798-B559-4DD5-A892-942A574A770A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4854E798-B559-4DD5-A892-942A574A770A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4854E798-B559-4DD5-A892-942A574A770A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +60,8 @@ Global
 		{9512F556-0C00-4798-ACCD-A1A9649E28CB} = {DE6E094F-E6F0-434C-9355-4565A48A3EE6}
 		{FD86B58F-E412-4E0D-AE69-BFCC4FE2568F} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
 		{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
+		{4854E798-B559-4DD5-A892-942A574A770A} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
+		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AB0B068-A475-4BEB-BF30-786E7882DFC1}
