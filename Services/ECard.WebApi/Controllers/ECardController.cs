@@ -65,6 +65,18 @@ namespace WebApi.Controllers
             return Ok(ecardDetailDto);
         }
 
+        [AllowAnonymous]
+        [Route("GetECardByTitleNDomainName/{title}/{domainName}")]
+        public IActionResult GetECardIdByTitleNDomainName(string title, string domainName)
+        {
+            ECardDetail ecardDetail = _ecardDetailService.GetECardDetailIdByTitleAndDomainName(title.Trim(), domainName.Trim());
+
+            if(ecardDetail != null)
+                return Ok(ecardDetail.Id);
+            else
+                return BadRequest(new { message = "Title & Domain Name does not exist." });
+        }
+
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]ECardDetailDto ecardDetailDto)
         {

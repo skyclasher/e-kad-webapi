@@ -2,6 +2,7 @@
 using ECard.Entities.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Dtos;
 using WebApi.Helpers;
 
 namespace WebApi.Services
@@ -13,6 +14,7 @@ namespace WebApi.Services
         ECardDetail Create(ECardDetail ecardDetail);
         void Update(ECardDetail user);
         void Delete(int id);
+        ECardDetail GetECardDetailIdByTitleAndDomainName(string title, string domainName);
     }
 
     public class ECardDetailService : IECardDetailService
@@ -32,6 +34,11 @@ namespace WebApi.Services
         public ECardDetail GetById(int id)
         {
             return _context.ECardDetail.Find(id);
+        }
+
+        public ECardDetail GetECardDetailIdByTitleAndDomainName(string title, string domainName)
+        {
+            return _context.ECardDetail.Where(x => x.Title == title && x.DomainName == domainName).FirstOrDefault();
         }
 
         public ECardDetail Create(ECardDetail eCardDetail)
