@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.JwtSecurity", "..\.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.AspNetCore.JwtSecurity", "..\..\Project\project-jwt-security\Aloji.AspNetCore.JwtSecurity\Project.AspNetCore.JwtSecurity.csproj", "{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AE903AEA-D3FD-44F3-A45F-51C9D862BCAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateUserConsole", "Tools\CreateUserConsole\CreateUserConsole.csproj", "{6FA868BE-63D1-4F55-B9A1-B06930384D3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{E3CDBAB8-B85F-4F8B-8CCB-566CF462D920} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
 		{4854E798-B559-4DD5-A892-942A574A770A} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
 		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
+		{6FA868BE-63D1-4F55-B9A1-B06930384D3D} = {AE903AEA-D3FD-44F3-A45F-51C9D862BCAA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AB0B068-A475-4BEB-BF30-786E7882DFC1}

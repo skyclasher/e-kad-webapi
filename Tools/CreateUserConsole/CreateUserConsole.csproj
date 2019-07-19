@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\ECard.WebApi\ECard.WebApi.csproj" />
+    <ProjectReference Include="..\..\Shared\ECard.Entities\ECard.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
