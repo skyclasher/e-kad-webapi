@@ -14,193 +14,199 @@ using WebApi.Helpers;
 
 namespace WebApi.Services
 {
-    public interface IRsvpService
-    {
-        IEnumerable<Rsvp> GetAll();
-        Rsvp GetById(int id);
-        Rsvp Create(Rsvp rsvp);
-        void Update(Rsvp rsvp);
-        void UpdateByEmail(Rsvp rsvp);
-        void Delete(int id);
-        Rsvp GetByEmail(string email);
-        List<Rsvp> GetByUserId(int userId);
-        ChartData GetRsvpChartData(int userId);
-        PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText);
-        PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage);
-    }
+	public interface IRsvpService
+	{
+		IEnumerable<Rsvp> GetAll();
+		Rsvp GetById(int id);
+		Rsvp Create(Rsvp rsvp);
+		void Update(Rsvp rsvp);
+		void UpdateByEmail(Rsvp rsvp);
+		void Delete(int id);
+		Rsvp GetByEmail(string email);
+		List<Rsvp> GetByUserId(int userId);
+		ChartData GetRsvpChartData(int userId);
+		PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText);
+		PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage);
+	}
 
-    public class RsvpService : IRsvpService
-    {
-        private ECardDataContext _context;
-        private readonly AppSettings _appSettings;
+	public class RsvpService : IRsvpService
+	{
+		private ECardDataContext _context;
+		private readonly AppSettings _appSettings;
 
-        public RsvpService(ECardDataContext context, IOptions<AppSettings> appSettings)
-        {
-            _context = context;
-            _appSettings = appSettings.Value;
-        }
+		public RsvpService(ECardDataContext context, IOptions<AppSettings> appSettings)
+		{
+			_context = context;
+			_appSettings = appSettings.Value;
+		}
 
-        public IEnumerable<Rsvp> GetAll()
-        {
-            return _context.Rsvp;
-        }
+		public IEnumerable<Rsvp> GetAll()
+		{
+			return _context.Rsvp;
+		}
 
-        public Rsvp GetById(int id)
-        {
-            return _context.Rsvp.Find(id);
-        }
+		public Rsvp GetById(int id)
+		{
+			return _context.Rsvp.Find(id);
+		}
 
-        public Rsvp GetByEmail(string email)
-        {
-            return _context.Rsvp.Where(x => x.Email == email).SingleOrDefault();
-        }
+		public Rsvp GetByEmail(string email)
+		{
+			return _context.Rsvp.Where(x => x.Email == email).SingleOrDefault();
+		}
 
-        public List<Rsvp> GetByUserId(int userId)
-        {
-            int ecardId = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault().Id;
+		public List<Rsvp> GetByUserId(int userId)
+		{
+			ECardDetail ecard = _context.ECardDetail.Where(x => x.Id_User == userId).FirstOrDefault();
 
-            return _context.Rsvp.Where(x => x.Id_EcardDetail == ecardId).ToList();
-        }
+			if (ecard == null)
+				return new List<Rsvp>() { };
+			else
+				return _context.Rsvp.Where(x => x.Id_EcardDetail == ecard.Id).ToList();
+		}
 
-        private PagingHelper<Rsvp> PagingRsvpByUserId(List<Rsvp> data, string searchText, int currentPage)
-        {
-            return PagingHelper<Rsvp>.ToPaging(data, x => x.OrderBy(y => y.Name), searchText, _appSettings.PageSize, currentPage);
-        }
+		private PagingHelper<Rsvp> PagingRsvpByUserId(List<Rsvp> data, string searchText, int currentPage)
+		{
+			return PagingHelper<Rsvp>.ToPaging(data, x => x.OrderBy(y => y.Name), searchText, _appSettings.PageSize, currentPage);
+		}
 
-        public PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText)
-        {
-            int ecardId = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault().Id;
+		public PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText)
+		{
+			int ecardId = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault().Id;
 
-            Expression<Func<Rsvp, bool>> filter =
-                   x => (x.Id_EcardDetail == ecardId)
-                        &&
-                        (string.IsNullOrEmpty(searchText) ? true :
-                           (x.Name.ToLower().Contains(searchText.ToLower()) ||
-                           x.AttCount.ToString().Contains(searchText))
-                        );
-
-
-            var data = _context.Rsvp.Where(filter).ToList();
-
-            return PagingRsvpByUserId(data, searchText, currentPage);
-        }
+			Expression<Func<Rsvp, bool>> filter =
+				   x => (x.Id_EcardDetail == ecardId)
+						&&
+						(string.IsNullOrEmpty(searchText) ? true :
+						   (x.Name.ToLower().Contains(searchText.ToLower()) ||
+						   x.AttCount.ToString().Contains(searchText))
+						);
 
 
-        public PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage)
-        {
-            int ecardId = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault().Id;
+			var data = _context.Rsvp.Where(filter).ToList();
 
-            Expression<Func<Rsvp, bool>> filter =
-                   x => (x.Id_EcardDetail == ecardId && x.Attendance == "H")
-                        &&
-                        (string.IsNullOrEmpty(searchText) ? true :
-                           (x.Name.ToLower().Contains(searchText.ToLower()) ||
-                           x.AttCount.ToString().Contains(searchText))
-                        );
+			return PagingRsvpByUserId(data, searchText, currentPage);
+		}
 
 
-            var data = _context.Rsvp.Where(filter).ToList();
+		public PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage)
+		{
+			int ecardId = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault().Id;
 
-            return PagingRsvpByUserId(data, searchText, currentPage);
-        }
-
-
-        public ChartData GetRsvpChartData(int userId)
-        {
-           List<Rsvp> rsvpList = GetByUserId(userId);
-
-            var data = rsvpList.GroupBy(r => r.Attendance)
-                                   .Select(grp => new
-                                   {
-                                       value = grp.Count(),
-                                       color = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : "#f56954",
-                                       highlight = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : "#f56954",
-                                       label = grp.Key == "H" ? "Hadir" : grp.Key == "M" ? "Mungkin" : "Tidak Hadir"
-                                   })
-                                   .OrderBy(o => o.label)
-                                   .ToList();
+			Expression<Func<Rsvp, bool>> filter =
+				   x => (x.Id_EcardDetail == ecardId && x.Attendance == "H")
+						&&
+						(string.IsNullOrEmpty(searchText) ? true :
+						   (x.Name.ToLower().Contains(searchText.ToLower()) ||
+						   x.AttCount.ToString().Contains(searchText))
+						);
 
 
-            ChartData chart = new ChartData();
+			var data = _context.Rsvp.Where(filter).ToList();
 
-            //chart.element = Constant.Admin.AvgSessionChart.element;
-            chart.resize = true;
-            chart.jsonData = JsonConvert.SerializeObject(data);
-
-            return chart;
-
-        }
-
-        public Rsvp Create(Rsvp rsvp)
-        {
-            // validation
-            if (string.IsNullOrWhiteSpace(rsvp.Email))
-                throw new AppException("Email is required");
-
-            Rsvp existing = GetByEmail(rsvp.Email);
-
-            if (existing == null)
-            {
-                // check if local is not null 
-                if (existing != null) // I'm using a extension method
-                {
-                    // detach
-                    _context.Entry(existing).State = EntityState.Detached;
-                }
-
-                _context.Rsvp.Add(rsvp);
-                _context.SaveChanges();
-            }
-            else
-            {
-                UpdateByEmail(rsvp);
-            }
-
-            return rsvp;
-        }
-
-        public void Update(Rsvp rsvp)
-        {
-            Rsvp rsvp1 = _context.Rsvp.Find(rsvp.Id);
-
-            if (rsvp1 == null)
-                throw new AppException("Rsvp record not found");
-
-            _context.Rsvp.Update(rsvp1);
-            _context.SaveChanges();
-        }
-
-        public void UpdateByEmail(Rsvp rsvp)
-        {
-            Rsvp existing = GetByEmail(rsvp.Email);
-
-            if (rsvp == null)
-                throw new AppException("Rsvp record not found");
-
-            rsvp.Id = existing.Id;
-            rsvp.Id_EcardDetail = existing.Id_EcardDetail;
-
-            // check if local is not null 
-            if (existing != null) // I'm using a extension method
-            {
-                // detach
-                _context.Entry(existing).State = EntityState.Detached;
-            }
-
-            _context.Rsvp.Update(rsvp);
-            _context.SaveChanges();
-        }
-
-        public void Delete(int id)
-        {
-            Rsvp rsvp1 = _context.Rsvp.Find(id);
-            if (rsvp1 != null)
-            {
-                _context.Rsvp.Remove(rsvp1);
-                _context.SaveChanges();
-            }
-        }
+			return PagingRsvpByUserId(data, searchText, currentPage);
+		}
 
 
-    }
+		public ChartData GetRsvpChartData(int userId)
+		{
+			List<Rsvp> rsvpList = GetByUserId(userId);
+			ChartData chart = new ChartData();
+
+			if (rsvpList.Count > 0)
+			{
+				var data = rsvpList.GroupBy(r => r.Attendance)
+									   .Select(grp => new
+									   {
+										   value = grp.Count(),
+										   color = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : "#f56954",
+										   highlight = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : "#f56954",
+										   label = grp.Key == "H" ? "Hadir" : grp.Key == "M" ? "Mungkin" : "Tidak Hadir"
+									   })
+									   .OrderBy(o => o.label)
+									   .ToList();
+
+
+
+				//chart.element = Constant.Admin.AvgSessionChart.element;
+				chart.resize = true;
+				chart.jsonData = JsonConvert.SerializeObject(data);
+
+			}
+
+			return chart;
+		}
+
+		public Rsvp Create(Rsvp rsvp)
+		{
+			// validation
+			if (string.IsNullOrWhiteSpace(rsvp.Email))
+				throw new AppException("Email is required");
+
+			Rsvp existing = GetByEmail(rsvp.Email);
+
+			if (existing == null)
+			{
+				// check if local is not null 
+				if (existing != null) // I'm using a extension method
+				{
+					// detach
+					_context.Entry(existing).State = EntityState.Detached;
+				}
+
+				_context.Rsvp.Add(rsvp);
+				_context.SaveChanges();
+			}
+			else
+			{
+				UpdateByEmail(rsvp);
+			}
+
+			return rsvp;
+		}
+
+		public void Update(Rsvp rsvp)
+		{
+			Rsvp rsvp1 = _context.Rsvp.Find(rsvp.Id);
+
+			if (rsvp1 == null)
+				throw new AppException("Rsvp record not found");
+
+			_context.Rsvp.Update(rsvp1);
+			_context.SaveChanges();
+		}
+
+		public void UpdateByEmail(Rsvp rsvp)
+		{
+			Rsvp existing = GetByEmail(rsvp.Email);
+
+			if (rsvp == null)
+				throw new AppException("Rsvp record not found");
+
+			rsvp.Id = existing.Id;
+			rsvp.Id_EcardDetail = existing.Id_EcardDetail;
+
+			// check if local is not null 
+			if (existing != null) // I'm using a extension method
+			{
+				// detach
+				_context.Entry(existing).State = EntityState.Detached;
+			}
+
+			_context.Rsvp.Update(rsvp);
+			_context.SaveChanges();
+		}
+
+		public void Delete(int id)
+		{
+			Rsvp rsvp1 = _context.Rsvp.Find(id);
+			if (rsvp1 != null)
+			{
+				_context.Rsvp.Remove(rsvp1);
+				_context.SaveChanges();
+			}
+		}
+
+
+	}
 }

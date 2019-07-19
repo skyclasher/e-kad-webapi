@@ -42,26 +42,36 @@ namespace ECard.Data.Infrastructure
 					continue;
 				}
 
-				var context = _httpContextAccessor.HttpContext;
-				if (entry.State == EntityState.Added)
+				if (_httpContextAccessor != null)
 				{
-					entityBase.CreatedBy = context == null ? "" : "";
-					entityBase.CreatedByName = context == null ? "" : "";
-					entityBase.ModifiedBy = context == null ? "" : "";
-					entityBase.ModifiedByName = context == null ? "" : "";
-					entityBase.CreatedDate = entityBase.CreatedDate == DateTime.MinValue ? currentTime : entityBase.CreatedDate;
+					var context = _httpContextAccessor.HttpContext;
+					if (entry.State == EntityState.Added)
+					{
+						entityBase.CreatedBy = context == null ? "" : "";
+						entityBase.CreatedByName = context == null ? "" : "";
+						entityBase.ModifiedBy = context == null ? "" : "";
+						entityBase.ModifiedByName = context == null ? "" : "";
+						entityBase.CreatedDate = entityBase.CreatedDate == DateTime.MinValue ? currentTime : entityBase.CreatedDate;
+						entityBase.ModifiedDate = currentTime;
+					}
+					else if (entry.State == EntityState.Modified)
+					{
+						entry.Property(nameof(entityBase.CreatedBy)).IsModified = false;
+						entry.Property(nameof(entityBase.CreatedByName)).IsModified = false;
+						entry.Property(nameof(entityBase.ModifiedBy)).IsModified = false;
+						entry.Property(nameof(entityBase.ModifiedByName)).IsModified = false;
+						entry.Property(nameof(entityBase.CreatedDate)).IsModified = false;
+						entityBase.ModifiedDate = currentTime;
+						entityBase.ModifiedBy = context == null ? "" : "";
+						entityBase.ModifiedByName = context == null ? "" : "";
+					}
+
+					entityBase.CreatedBy = "Console";
+					entityBase.CreatedByName = "Console";
+					entityBase.ModifiedBy = "Console";
+					entityBase.ModifiedByName = "Console";
+					entityBase.CreatedDate = currentTime;
 					entityBase.ModifiedDate = currentTime;
-				}
-				else if (entry.State == EntityState.Modified)
-				{
-					entry.Property(nameof(entityBase.CreatedBy)).IsModified = false;
-					entry.Property(nameof(entityBase.CreatedByName)).IsModified = false;
-					entry.Property(nameof(entityBase.ModifiedBy)).IsModified = false;
-					entry.Property(nameof(entityBase.ModifiedByName)).IsModified = false;
-					entry.Property(nameof(entityBase.CreatedDate)).IsModified = false;
-					entityBase.ModifiedDate = currentTime;
-					entityBase.ModifiedBy = context == null ? "" : "";
-					entityBase.ModifiedByName = context == null ? "" : "";
 				}
 			}
 
