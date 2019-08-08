@@ -75,7 +75,6 @@ namespace WebApi.Controllers
             }
         }
 
-        [AllowAnonymous]
         [Route("GetByEmail/{email}")]
         public IActionResult GetByEmail(string email)
         {
@@ -90,9 +89,26 @@ namespace WebApi.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
-        }
+		}
 
-        [Route("GetRsvpByUserId/{userId}")]
+		[AllowAnonymous]
+		[Route("GetByEmailAndECardId/{email}/{ecardId}")]
+		public IActionResult GetByEmailAndECardId(string email, int ecardId)
+		{
+			try
+			{
+				var rsvp = _rsvpService.GetByEmailAndECardId(email, ecardId);
+				var rsvpDto = _mapper.Map<RsvpDto>(rsvp);
+				return Ok(rsvpDto);
+			}
+			catch (AppException ex)
+			{
+				// return error message if there was an exception
+				return BadRequest(new { message = ex.Message });
+			}
+		}
+
+		[Route("GetRsvpByUserId/{userId}")]
         public IActionResult GetRsvpByUserId(int userId)
         {
             try

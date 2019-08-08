@@ -23,6 +23,7 @@ namespace WebApi.Services
 		void UpdateByEmail(Rsvp rsvp);
 		void Delete(int id);
 		Rsvp GetByEmail(string email);
+		Rsvp GetByEmailAndECardId(string email, int ecardId);
 		List<Rsvp> GetByUserId(int userId);
 		ChartData GetRsvpChartData(int userId);
 		PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText);
@@ -53,6 +54,11 @@ namespace WebApi.Services
 		public Rsvp GetByEmail(string email)
 		{
 			return _context.Rsvp.Where(x => x.Email == email).SingleOrDefault();
+		}
+
+		public Rsvp GetByEmailAndECardId(string email, int ecardId)
+		{
+			return _context.Rsvp.Where(x => x.Email == email && x.Id_EcardDetail == ecardId).SingleOrDefault();
 		}
 
 		public List<Rsvp> GetByUserId(int userId)
@@ -143,7 +149,7 @@ namespace WebApi.Services
 			if (string.IsNullOrWhiteSpace(rsvp.Email))
 				throw new AppException("Email is required");
 
-			Rsvp existing = GetByEmail(rsvp.Email);
+			Rsvp existing = GetByEmailAndECardId(rsvp.Email, rsvp.Id_EcardDetail);
 
 			if (existing == null)
 			{
