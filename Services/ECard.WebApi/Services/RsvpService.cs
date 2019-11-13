@@ -28,6 +28,7 @@ namespace WebApi.Services
 		ChartData GetRsvpChartData(int userId);
 		PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText);
 		PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage);
+		PagingHelper<Rsvp> GetPagedNotAttendRsvpByUserId(int userId, string searchText, int currentPage);
 	}
 
 	public class RsvpService : IRsvpService
@@ -97,20 +98,47 @@ namespace WebApi.Services
 
 		public PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage)
 		{
-			int ecardId = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault().Id;
+			List<Rsvp> rsvps = new List<Rsvp>();
+			ECardDetail ecard = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault();
 
-			Expression<Func<Rsvp, bool>> filter =
-				   x => (x.Id_EcardDetail == ecardId && x.Attendance == "H")
-						&&
-						(string.IsNullOrEmpty(searchText) ? true :
-						   (x.Name.ToLower().Contains(searchText.ToLower()) ||
-						   x.AttCount.ToString().Contains(searchText))
-						);
+			if (ecard != null)
+			{
+				Expression<Func<Rsvp, bool>> filter =
+					   x => (x.Id_EcardDetail == ecard.Id && x.Attendance == "H")
+							&&
+							(string.IsNullOrEmpty(searchText) ? true :
+							   (x.Name.ToLower().Contains(searchText.ToLower()) ||
+							   x.AttCount.ToString().Contains(searchText))
+							);
 
 
-			var data = _context.Rsvp.Where(filter).ToList();
+				rsvps = _context.Rsvp.Where(filter).ToList();
+			}
 
-			return PagingRsvpByUserId(data, searchText, currentPage);
+			return PagingRsvpByUserId(rsvps, searchText, currentPage);
+		}
+
+
+		public PagingHelper<Rsvp> GetPagedNotAttendRsvpByUserId(int userId, string searchText, int currentPage)
+		{
+			List<Rsvp> rsvps = new List<Rsvp>();
+			ECardDetail ecard = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault();
+
+			if (ecard != null)
+			{
+				Expression<Func<Rsvp, bool>> filter =
+					   x => (x.Id_EcardDetail == ecard.Id && x.Attendance != "H")
+							&&
+							(string.IsNullOrEmpty(searchText) ? true :
+							   (x.Name.ToLower().Contains(searchText.ToLower()) ||
+							   x.AttCount.ToString().Contains(searchText))
+							);
+
+
+				rsvps = _context.Rsvp.Where(filter).ToList();
+			}
+
+			return PagingRsvpByUserId(rsvps, searchText, currentPage);
 		}
 
 
@@ -125,9 +153,9 @@ namespace WebApi.Services
 									   .Select(grp => new
 									   {
 										   value = grp.Count(),
-										   color = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : "#f56954",
-										   highlight = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : "#f56954",
-										   label = grp.Key == "H" ? "Hadir" : grp.Key == "M" ? "Mungkin" : "Tidak Hadir"
+										   color = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : grp.Key == "T" ? "#f56954" : "#d3d3d3",
+										   highlight = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : grp.Key == "T" ? "#f56954" : "#d3d3d3",
+										   label = grp.Key == "H" ? "Hadir" : grp.Key == "M" ? "Mungkin" : grp.Key == "T" ? "Tidak Hadir" : "Tiada Jawapan"
 									   })
 									   .OrderBy(o => o.label)
 									   .ToList();
@@ -165,7 +193,7 @@ namespace WebApi.Services
 			}
 			else
 			{
-				UpdateByEmail(rsvp);
+				Update(rsvp);
 			}
 
 			return rsvp;
@@ -173,12 +201,23 @@ namespace WebApi.Services
 
 		public void Update(Rsvp rsvp)
 		{
-			Rsvp rsvp1 = _context.Rsvp.Find(rsvp.Id);
+			Rsvp existing = GetByEmailAndECardId(rsvp.Email, rsvp.Id_EcardDetail);
 
-			if (rsvp1 == null)
+			if (existing == null)
 				throw new AppException("Rsvp record not found");
 
-			_context.Rsvp.Update(rsvp1);
+			rsvp.Id = existing.Id;
+			rsvp.Id_EcardDetail = existing.Id_EcardDetail;
+			rsvp.ECardDetail = null;
+
+			// check if local is not null 
+			if (existing != null) // I'm using a extension method
+			{
+				// detach
+				_context.Entry(existing).State = EntityState.Detached;
+			}
+
+			_context.Rsvp.Update(rsvp);
 			_context.SaveChanges();
 		}
 

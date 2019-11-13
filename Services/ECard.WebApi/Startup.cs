@@ -27,12 +27,13 @@ namespace WebApi
 			Configuration = configuration;
 		}
 
-		public IConfiguration Configuration { get; }
+		public IConfiguration Configuration;
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors();
+			//services.AddDbContext<ECardDataContext>(x => x.UseMySql("Server=localhost;User Id=ekad;Password=wL#$gBW@8?fjDPmdm6ef;Database=ekad"));
 			services.AddDbContext<ECardDataContext>(x => x.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
 			// configure strongly typed settings objects
@@ -44,7 +45,9 @@ namespace WebApi
 			  .AddJwtBearerAuthentication(options =>
 			  {
 				  options.Issuer = "yourIssuerCode";
-				  options.IssuerSigningKey = _appSettings.Secret;
+				  options.IssuerSigningKey = "fVGGS9A&3ULP$P-U5aFRGge!RmBRhRCENMY+A3Ckq2E2%HwVqC#^x7w*aU4B3P&ZE52A!uzCUtn+&E48nnY46YPt*^Ne5VwU%LG&w9qmxG$+9LrYPzz5_kDkF$FW2NCe5ud+xKh7Uka%DbcGukp=-pgXr!=wZ@rWvQSc^L%rn@3Qp^CT8Jz=wNF$f8=vA2zY2X9XSJd*3@AkpgSz=^##DFhtCnqn&5D^xVgZj$y5-&BbBPuzrga^UUndQ*^&nCPj";
+
+				  // options.IssuerSigningKey = _appSettings.Secret;
 			  });
 
 			services.AddJwtServer().AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -75,6 +78,7 @@ namespace WebApi
 				options.TokenEndpointPath = "/api/Token";
 				options.AccessTokenExpireTimeSpan = new TimeSpan(1, 0, 0);
 				options.Issuer = "yourIssuerCode";
+				//options.IssuerSigningKey = "fVGGS9A&3ULP$P-U5aFRGge!RmBRhRCENMY+A3Ckq2E2%HwVqC#^x7w*aU4B3P&ZE52A!uzCUtn+&E48nnY46YPt*^Ne5VwU%LG&w9qmxG$+9LrYPzz5_kDkF$FW2NCe5ud+xKh7Uka%DbcGukp=-pgXr!=wZ@rWvQSc^L%rn@3Qp^CT8Jz=wNF$f8=vA2zY2X9XSJd*3@AkpgSz=^##DFhtCnqn&5D^xVgZj$y5-&BbBPuzrga^UUndQ*^&nCPj";
 				options.IssuerSigningKey = _appSettings.Secret;
 				options.AuthorizationServerProvider = new AuthorizationServerProvider
 				{
