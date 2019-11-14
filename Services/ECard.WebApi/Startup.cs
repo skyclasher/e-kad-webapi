@@ -45,9 +45,8 @@ namespace WebApi
 			  .AddJwtBearerAuthentication(options =>
 			  {
 				  options.Issuer = "yourIssuerCode";
-				  options.IssuerSigningKey = "fVGGS9A&3ULP$P-U5aFRGge!RmBRhRCENMY+A3Ckq2E2%HwVqC#^x7w*aU4B3P&ZE52A!uzCUtn+&E48nnY46YPt*^Ne5VwU%LG&w9qmxG$+9LrYPzz5_kDkF$FW2NCe5ud+xKh7Uka%DbcGukp=-pgXr!=wZ@rWvQSc^L%rn@3Qp^CT8Jz=wNF$f8=vA2zY2X9XSJd*3@AkpgSz=^##DFhtCnqn&5D^xVgZj$y5-&BbBPuzrga^UUndQ*^&nCPj";
-
-				  // options.IssuerSigningKey = _appSettings.Secret;
+				  //options.IssuerSigningKey = "fVGGS9A&3ULP$P-U5aFRGge!RmBRhRCENMY+A3Ckq2E2%HwVqC#^x7w*aU4B3P&ZE52A!uzCUtn+&E48nnY46YPt*^Ne5VwU%LG&w9qmxG$+9LrYPzz5_kDkF$FW2NCe5ud+xKh7Uka%DbcGukp=-pgXr!=wZ@rWvQSc^L%rn@3Qp^CT8Jz=wNF$f8=vA2zY2X9XSJd*3@AkpgSz=^##DFhtCnqn&5D^xVgZj$y5-&BbBPuzrga^UUndQ*^&nCPj";
+				  options.IssuerSigningKey = _appSettings.Secret;
 			  });
 
 			services.AddJwtServer().AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
