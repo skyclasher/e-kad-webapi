@@ -1,10 +1,10 @@
 ﻿using ECard.Data.Infrastructure;
 using ECard.Entities.DomainModels.Chart;
 using ECard.Entities.Entities;
-using ECard.WebApi.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Project.Framework.Configuration;
 using Project.Framework.Helper;
 using System;
 using System.Collections.Generic;
@@ -29,6 +29,7 @@ namespace WebApi.Services
 		PagingHelper<Rsvp> GetPagedRsvpByUserId(int userId, int currentPage, string searchText);
 		PagingHelper<Rsvp> GetPagedAttendRsvpByUserId(int userId, string searchText, int currentPage);
 		PagingHelper<Rsvp> GetPagedNotAttendRsvpByUserId(int userId, string searchText, int currentPage);
+		PagingHelper<Rsvp> GetPagedMaybeAttendRsvpByUserId(int userId, string searchText, int currentPage);
 	}
 
 	public class RsvpService : IRsvpService
@@ -119,6 +120,29 @@ namespace WebApi.Services
 		}
 
 
+		public PagingHelper<Rsvp> GetPagedMaybeAttendRsvpByUserId(int userId, string searchText, int currentPage)
+		{
+			List<Rsvp> rsvps = new List<Rsvp>();
+			ECardDetail ecard = _context.ECardDetail.Where(x => x.Id_User == userId).SingleOrDefault();
+
+			if (ecard != null)
+			{
+				Expression<Func<Rsvp, bool>> filter =
+					   x => (x.Id_EcardDetail == ecard.Id && x.Attendance != "H" && x.Attendance != "T")
+							&&
+							(string.IsNullOrEmpty(searchText) ? true :
+							   (x.Name.ToLower().Contains(searchText.ToLower()) ||
+							   x.AttCount.ToString().Contains(searchText))
+							);
+
+
+				rsvps = _context.Rsvp.Where(filter).ToList();
+			}
+
+			return PagingRsvpByUserId(rsvps, searchText, currentPage);
+		}
+
+
 		public PagingHelper<Rsvp> GetPagedNotAttendRsvpByUserId(int userId, string searchText, int currentPage)
 		{
 			List<Rsvp> rsvps = new List<Rsvp>();
@@ -127,7 +151,7 @@ namespace WebApi.Services
 			if (ecard != null)
 			{
 				Expression<Func<Rsvp, bool>> filter =
-					   x => (x.Id_EcardDetail == ecard.Id && x.Attendance != "H")
+					   x => (x.Id_EcardDetail == ecard.Id && x.Attendance == "T")
 							&&
 							(string.IsNullOrEmpty(searchText) ? true :
 							   (x.Name.ToLower().Contains(searchText.ToLower()) ||
@@ -149,10 +173,14 @@ namespace WebApi.Services
 
 			if (rsvpList.Count > 0)
 			{
+				int attend = rsvpList.Where(y => y.Attendance == "H").ToList().Sum(x => x.AttCount);
+				int maybe = rsvpList.Where(y => y.Attendance == "M").ToList().Sum(x => x.AttCount);
+				int noAnswer = rsvpList.Where(y => string.IsNullOrEmpty(y.Attendance)).ToList().Sum(x => x.AttCount);
+
 				var data = rsvpList.GroupBy(r => r.Attendance)
 									   .Select(grp => new
 									   {
-										   value = grp.Count(),
+										   value = grp.Key == "H" ? attend : grp.Key == "M" ? maybe : grp.Key == "T" ? grp.Count() : noAnswer,
 										   color = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : grp.Key == "T" ? "#f56954" : "#d3d3d3",
 										   highlight = grp.Key == "H" ? "#00a65a" : grp.Key == "M" ? "#f39c12" : grp.Key == "T" ? "#f56954" : "#d3d3d3",
 										   label = grp.Key == "H" ? "Hadir" : grp.Key == "M" ? "Mungkin" : grp.Key == "T" ? "Tidak Hadir" : "Tiada Jawapan"

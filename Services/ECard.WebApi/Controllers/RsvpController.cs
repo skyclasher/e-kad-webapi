@@ -174,6 +174,25 @@ namespace WebApi.Controllers
 			}
 		}
 
+		[Route("GetPagedMaybeAttendRsvpByUserId/{userId}/{searchText}/{currentPage}")]
+		public IActionResult GetPagedMaybeAttendRsvpByUserId(int userId, string searchText, int currentPage)
+		{
+			try
+			{
+				if (searchText == Constant.ReplaceText.EmptyString)
+					searchText = string.Empty;
+
+				PagingHelper<Rsvp> data = _rsvpService.GetPagedMaybeAttendRsvpByUserId(userId, searchText, currentPage);
+				return Ok(data);
+			}
+			catch (AppException ex)
+			{
+				// return error message if there was an exception
+				return BadRequest(new { message = ex.Message });
+			}
+		}
+
+
 		[Route("GetPagedNotAttendRsvpByUserId/{userId}/{searchText}/{currentPage}")]
 		public IActionResult GetPagedNotAttendRsvpByUserId(int userId, string searchText, int currentPage)
 		{

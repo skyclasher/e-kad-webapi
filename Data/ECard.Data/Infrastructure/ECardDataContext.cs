@@ -81,5 +81,6 @@ namespace ECard.Data.Infrastructure
 		public DbSet<User> Users { get; set; }
 		public DbSet<Rsvp> Rsvp { get; set; }
 		public DbSet<ECardDetail> ECardDetail { get; set; }
+		public DbSet<XloRecord> XloRecord { get; set; }
 	}
 }

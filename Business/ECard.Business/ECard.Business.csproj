@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Project\project-helper\Project.Framework.csproj" />
+    <ProjectReference Include="..\..\Data\ECard.Data\ECard.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Project\project-jwt-security\Aloji.AspNetCore.JwtSecurity\Project.AspNetCore.JwtSecurity.csproj" />
+    <ProjectReference Include="..\..\Business\ECard.Business\ECard.Business.csproj" />
     <ProjectReference Include="..\..\Data\ECard.Data\ECard.Data.csproj" />
     <ProjectReference Include="..\..\Shared\ECard.Entities\ECard.Entities.csproj" />
   </ItemGroup>

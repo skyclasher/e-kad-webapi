@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using ECard.Business.XloRecords;
 using ECard.Data.Infrastructure;
-using ECard.WebApi.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Project.AspNetCore.JwtSecurity.Services.Implementations;
+using Project.Framework.Configuration;
 using Project.Framework.Constants;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,8 @@ namespace WebApi
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IECardDetailService, ECardDetailService>();
 			services.AddScoped<IRsvpService, RsvpService>();
+			//services.AddScoped<IGenericComponent, GenericComponent>();
+			services.AddScoped<IXloRecordComponent, XloRecordComponent>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

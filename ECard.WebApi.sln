@@ -23,7 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.AspNetCore.JwtSecur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AE903AEA-D3FD-44F3-A45F-51C9D862BCAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateUserConsole", "Tools\CreateUserConsole\CreateUserConsole.csproj", "{6FA868BE-63D1-4F55-B9A1-B06930384D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateUserConsole", "Tools\CreateUserConsole\CreateUserConsole.csproj", "{6FA868BE-63D1-4F55-B9A1-B06930384D3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{FB76FC5D-CD38-4710-9C40-E65B4BD2C5CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECard.Business", "Business\ECard.Business\ECard.Business.csproj", "{137A5477-6350-41ED-AF05-6D1307395B4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,10 @@ Global
 		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FA868BE-63D1-4F55-B9A1-B06930384D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137A5477-6350-41ED-AF05-6D1307395B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137A5477-6350-41ED-AF05-6D1307395B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137A5477-6350-41ED-AF05-6D1307395B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137A5477-6350-41ED-AF05-6D1307395B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,7 @@ Global
 		{4854E798-B559-4DD5-A892-942A574A770A} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
 		{95DDF7DA-D3C0-421E-ACC9-75F32AE4F4AB} = {F470BDF3-5463-4FC3-BCF4-BC7B17AFE0D1}
 		{6FA868BE-63D1-4F55-B9A1-B06930384D3D} = {AE903AEA-D3FD-44F3-A45F-51C9D862BCAA}
+		{137A5477-6350-41ED-AF05-6D1307395B4B} = {FB76FC5D-CD38-4710-9C40-E65B4BD2C5CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AB0B068-A475-4BEB-BF30-786E7882DFC1}
